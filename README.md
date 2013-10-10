@@ -11,6 +11,13 @@ spreadsheet.
 ## Usage
 
 ``` ruby
+# Gemfile
+
+gem 'nandeck-ruby', git: 'git://github.com/johnbintz/nandeck-ruby.git'
+```
+
+``` ruby
+# builder.rb
 require 'nandeck'
 
 class Card
