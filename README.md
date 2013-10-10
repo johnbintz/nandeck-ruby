@@ -49,8 +49,17 @@ output += Nandeck::Margins.new(0.5, 0.25).to_a
 output << "OVERSAMPLE = 2"
 output << "IMAGEFILTER = Lanczos"
 
-output << Nandeck::Rectangle.new(1, 0, 0, Card.width, Card.height, '#000000', '#ffffff', Card.border)
-output << Nandeck::Image.new(1, "images/background.png", 0, 0, Card.width, Card.height, flag: 'P', alpha_channel: "10@270")
+output << Nandeck::Rectangle.new(
+  1,
+  0, 0, Card.width, Card.height,
+  '#000000', '#ffffff', Card.border
+)
+output << Nandeck::Image.new(
+  1,
+  "images/background.png",
+  0, 0, Card.width, Card.height,
+  flag: 'P', alpha_channel: "10@270"
+)
 
 area = Nandeck::Geometry.new(Card.border + 0.05, Card.real_border + 0.05, 0.688, 0.640)
 output << Nandeck::Image.new(1, "images/balloon.png", *balloon.to_a)
@@ -61,18 +70,29 @@ Nandeck::Font.for(typeface: "Tahoma", flag: 'T') do |font|
   font.for(size: inches_to_points(height), color: "#000000") do |balloon_font|
     x, y = balloon.center.to_a
 
-    output << balloon_font.text(1, "5", x - height / 2 - 0.10, y - height / 2 - 0.10, height + 0.20, height)
+    output << balloon_font.text(1,
+      "5", x - height / 2 - 0.10, y - height / 2 - 0.10, height + 0.20, height
+    )
   end
 end
 
 line_height = 14
 
-Nandeck::Font.for typeface: "Tahoma", size: line_height, flag: "TB", color: '#000000' do |font|
+Nandeck::Font.for(
+  typeface: "Tahoma", size: line_height, flag: "TB", color: '#000000'
+) do |font|
   font.for color: '#ffffff' do |outline|
-    output << Nandeck::TextBlock.new(1, outline, "name", 16, 0.90, Card.real_border + 0.1, Card.width - Card.real_border - 1.00, 0.38, outline: Card.pixel * 2)
+    output << Nandeck::TextBlock.new(
+      1, outline, "name", 16,
+      0.90, Card.real_border + 0.1, Card.width - Card.real_border - 1.00, 0.38,
+      outline: Card.pixel * 2
+    )
   end
 
-  output << Nandeck::TextBlock.new(1, font, "name", 16, 0.90, Card.real_border + 0.1, Card.width - Card.real_border - 1.00, 0.38)
+  output << Nandeck::TextBlock.new(
+    1, font, "name", 16,
+    0.90, Card.real_border + 0.1, Card.width - Card.real_border - 1.00, 0.38
+  )
 end
 
 File.open("output.txt", "w") do |fh|
