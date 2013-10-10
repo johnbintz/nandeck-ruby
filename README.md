@@ -62,13 +62,13 @@ output << Nandeck::Image.new(
 )
 
 area = Nandeck::Geometry.new(Card.border + 0.05, Card.real_border + 0.05, 0.688, 0.640)
-output << Nandeck::Image.new(1, "images/balloon.png", *balloon.to_a)
+output << Nandeck::Image.new(1, "images/balloon.png", *area.to_a)
 
 Nandeck::Font.for(typeface: "Tahoma", flag: 'T') do |font|
   height = 0.41
 
   font.for(size: inches_to_points(height), color: "#000000") do |balloon_font|
-    x, y = balloon.center.to_a
+    x, y = area.center.to_a
 
     output << balloon_font.text(1,
       "5", x - height / 2 - 0.10, y - height / 2 - 0.10, height + 0.20, height
